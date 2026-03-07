@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arthapex — Peak Business Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:  #F9F7F3;
+      --white:  #FFFFFF;
+      --ink:    #1A1A18;
+      --ink-60: #1A1A1899;
+      --ink-30: #1A1A184D;
+      --gold:   #C4933A;
+      --gold-lt:#EDD9A3;
+      --sage:   #4A5E52;
+      --border: #E4E1D9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(249,247,243,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown .6s ease both;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .85rem; font-weight: 400; letter-spacing: .04em;
+      color: var(--ink-60); text-decoration: none; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      font-size: .8rem; font-weight: 500;
+      padding: .55rem 1.35rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 2px;
+      color: var(--ink) !important;
+      transition: background .2s, color .2s !important;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--cream) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 5vw 80px;
+      gap: 6vw;
+    }
+
+    .hero-text { max-width: 580px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .75rem; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.8rem;
+      animation: fadeUp .8s .2s ease both;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 1.5px; background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      margin-bottom: 1.6rem;
+      animation: fadeUp .8s .35s ease both;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+      color: var(--ink-60); max-width: 440px;
+      margin-bottom: 2.8rem;
+      animation: fadeUp .8s .5s ease both;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+      animation: fadeUp .8s .65s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 2rem;
+      background: var(--ink); color: var(--cream);
+      font-size: .85rem; font-weight: 500; letter-spacing: .04em;
+      text-transform: uppercase; text-decoration: none;
+      border: none; cursor: pointer; border-radius: 2px;
+      transition: background .25s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .85rem; font-weight: 400; letter-spacing: .04em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--ink-60); border-bottom: 1px solid var(--ink-30);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* Hero visual */
+    .hero-visual {
+      display: flex; justify-content: flex-end; align-items: center;
+      animation: fadeIn 1s .4s ease both;
+    }
+
+    .dashboard-card {
+      width: 100%; max-width: 520px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 24px 80px rgba(26,26,24,.08);
+      position: relative;
+    }
+
+    .card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.8rem;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 500; color: var(--ink);
+    }
+    .card-badge {
+      font-size: .7rem; font-weight: 500; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--sage);
+      background: #EAF0EC; padding: .25rem .65rem; border-radius: 99px;
+    }
+
+    .metric-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 1.8rem;
+    }
+    .metric {
+      background: var(--cream); border-radius: 8px; padding: 1rem;
+    }
+    .metric-label {
+      font-size: .7rem; color: var(--ink-60); letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: .4rem;
+    }
+    .metric-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 500; color: var(--ink);
+    }
+    .metric-delta {
+      font-size: .7rem; color: var(--sage); margin-top: .2rem;
+    }
+
+    .chart-area {
+      height: 100px; position: relative; margin-bottom: 1.5rem;
+    }
+    .chart-area svg { width: 100%; height: 100%; }
+
+    .task-list { display: flex; flex-direction: column; gap: .6rem; }
+    .task-item {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .82rem; color: var(--ink-60); padding: .55rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .task-dot.gold { background: var(--gold); }
+    .task-dot.sage { background: var(--sage); }
+    .task-dot.muted { background: var(--ink-30); }
+
+    .floating-pill {
+      position: absolute; top: -18px; right: 20px;
+      background: var(--ink); color: var(--cream);
+      font-size: .72rem; font-weight: 500; letter-spacing: .06em;
+      padding: .45rem 1rem; border-radius: 99px;
+      display: flex; align-items: center; gap: .4rem;
+      box-shadow: 0 8px 24px rgba(26,26,24,.2);
+    }
+    .pulse { 
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #5DBB7A;
+      animation: pulse 1.8s infinite;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 5vw; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .72rem; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 22px; height: 1.5px; background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 300; line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem; font-weight: 300; line-height: 1.75;
+      color: var(--ink-60); max-width: 480px;
+    }
+
+    /* ── FEATURES ── */
+    .features-header { max-width: 680px; margin-bottom: 5rem; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .feature-item {
+      background: var(--cream);
+      padding: 3rem 2.5rem;
+      transition: background .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-item::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width .35s ease;
+    }
+    .feature-item:hover { background: var(--white); }
+    .feature-item:hover::after { width: 100%; }
+
+    .feature-icon {
+      width: 42px; height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.8rem;
+      color: var(--gold);
+    }
+    .feature-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .feature-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 500; margin-bottom: .75rem;
+    }
+    .feature-desc {
+      font-size: .88rem; font-weight: 300; line-height: 1.7;
+      color: var(--ink-60);
+    }
+
+    /* ── APPS ── */
+    .apps { background: var(--ink); color: var(--cream); }
+    .apps .section-label { color: var(--gold-lt); }
+    .apps .section-label::before { background: var(--gold-lt); }
+    .apps .section-title { color: var(--cream); }
+    .apps .section-sub { color: rgba(249,247,243,.55); }
+
+    .apps-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6vw; align-items: center; margin-top: 5rem;
+    }
+
+    .app-card {
+      background: rgba(249,247,243,.05);
+      border: 1px solid rgba(249,247,243,.12);
+      border-radius: 16px; padding: 3rem;
+      display: flex; flex-direction: column; gap: 1.5rem;
+      transition: border-color .25s, background .25s;
+      text-decoration: none;
+    }
+    .app-card:hover {
+      background: rgba(249,247,243,.09);
+      border-color: rgba(196,147,58,.4);
+    }
+
+    .app-card-icon {
+      width: 56px; height: 56px;
+      background: rgba(196,147,58,.15);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+    }
+    .app-card-icon svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .app-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 400; color: var(--cream);
+    }
+    .app-card-name span {
+      display: block; font-size: .8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300; letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(249,247,243,.45); margin-bottom: .3rem;
+    }
+
+    .app-card-desc {
+      font-size: .88rem; font-weight: 300; line-height: 1.7;
+      color: rgba(249,247,243,.55); flex: 1;
+    }
+
+    .store-badges { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .store-badge {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .65rem 1.2rem;
+      border: 1px solid rgba(249,247,243,.2); border-radius: 8px;
+      font-size: .78rem; font-weight: 400; color: var(--cream);
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+      cursor: pointer;
+    }
+    .store-badge:hover { background: rgba(249,247,243,.08); border-color: rgba(249,247,243,.4); }
+    .store-badge svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .apps-info {
+      display: flex; flex-direction: column; gap: 2.5rem;
+    }
+
+    .apps-stat {
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(249,247,243,.1);
+    }
+    .apps-stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .apps-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; color: var(--gold);
+      line-height: 1;
+    }
+    .apps-stat-label {
+      font-size: .82rem; font-weight: 300; color: rgba(249,247,243,.5);
+      margin-top: .4rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8vw; align-items: start;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: .45rem; }
+    .form-label {
+      font-size: .72rem; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink-60);
+    }
+    .form-input, .form-textarea {
+      padding: .85rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; font-weight: 300; color: var(--ink);
+      outline: none; resize: none;
+      transition: border-color .2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-textarea { min-height: 130px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 5vw;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; color: var(--ink);
+    }
+    .footer-logo span { color: var(--gold); }
+
+    .footer-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .footer-links a {
+      font-size: .78rem; font-weight: 300;
+      color: var(--ink-60); text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    .footer-copy {
+      font-size: .75rem; color: var(--ink-30);
+      width: 100%;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(.8); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { justify-content: center; order: -1; }
+      .features-grid { grid-template-columns: 1fr; }
+      .apps-layout { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Artha<span>pex</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="/compressa" class="nav-cta">Compressa ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Business Performance Suite</div>
+      <h1 class="hero-title">
+        Where businesses<br/>reach their <em>apex</em>
+      </h1>
+      <p class="hero-sub">
+        Arthapex gives ambitious teams the tools to work smarter — streamlining operations, surfacing insights, and compressing complexity into clarity.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Get Early Access
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#features" class="btn-ghost">Explore features</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="dashboard-card">
+        <div class="floating-pill">
+          <span class="pulse"></span> Live Dashboard
+        </div>
+        <div class="card-header">
+          <div class="card-title">Performance Overview</div>
+          <div class="card-badge">Q1 2026</div>
+        </div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Revenue</div>
+            <div class="metric-value">₹4.2M</div>
+            <div class="metric-delta">↑ 18.4%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Tasks Done</div>
+            <div class="metric-value">847</div>
+            <div class="metric-delta">↑ 31.2%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Efficiency</div>
+            <div class="metric-value">94%</div>
+            <div class="metric-delta">↑ 6.1%</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <svg viewBox="0 0 460 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#C4933A" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#C4933A" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,80 C40,75 60,65 100,55 C140,45 160,70 200,50 C240,30 260,40 300,28 C340,16 380,22 420,12 L460,8 L460,100 L0,100 Z" fill="url(#chartGrad)"/>
+            <path d="M0,80 C40,75 60,65 100,55 C140,45 160,70 200,50 C240,30 260,40 300,28 C340,16 380,22 420,12 L460,8" fill="none" stroke="#C4933A" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="task-list">
+          <div class="task-item"><span class="task-dot gold"></span>Q1 Financial Report — due today</div>
+          <div class="task-item"><span class="task-dot sage"></span>Team sync with Priya & Rahul — 3 PM</div>
+          <div class="task-item"><span class="task-dot muted"></span>Compress March invoices via Compressa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="features-header reveal">
+      <div class="section-label">Why Arthapex</div>
+      <h2 class="section-title">Built for teams that demand more</h2>
+      <p class="section-sub">Every feature is designed to remove friction and amplify output — so you spend less time managing and more time growing.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-item reveal">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <div class="feature-name">Unified Workspace</div>
+        <p class="feature-desc">All your projects, tasks, documents, and team communication in one coherent, distraction-free environment.</p>
+      </div>
+
+      <div class="feature-item reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="feature-name">Real-Time Analytics</div>
+        <p class="feature-desc">Surface what matters most with live dashboards that track performance metrics and flag bottlenecks instantly.</p>
+      </div>
+
+      <div class="feature-item reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feature-name">Secure by Design</div>
+        <p class="feature-desc">Enterprise-grade encryption, role-based access controls, and audit logs — security that never gets in the way.</p>
+      </div>
+
+      <div class="feature-item reveal">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+        </div>
+        <div class="feature-name">Smart Automation</div>
+        <p class="feature-desc">Set up workflows that handle repetitive tasks automatically — approvals, reminders, reports, and more.</p>
+      </div>
+
+      <div class="feature-item reveal reveal-delay-1">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feature-name">Team Collaboration</div>
+        <p class="feature-desc">Comment, assign, and co-edit in real time. Keep everyone aligned without the back-and-forth of emails.</p>
+      </div>
+
+      <div class="feature-item reveal reveal-delay-2">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="feature-name">Cross-Platform</div>
+        <p class="feature-desc">Work seamlessly across web, iOS, and Android. Your data syncs instantly so you're always in context.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPS -->
+  <section id="apps" class="apps">
+    <div class="reveal">
+      <div class="section-label">Mobile Apps</div>
+      <h2 class="section-title">Productivity in your pocket</h2>
+      <p class="section-sub">Arthapex extends to mobile — purpose-built apps that keep you moving, even on the go.</p>
+    </div>
+
+    <div class="apps-layout">
+      <div>
+        <a href="/compressa" class="app-card reveal">
+          <div class="app-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div class="app-card-name">
+            <span>arthapex.com/compressa</span>
+            Compressa
+          </div>
+          <p class="app-card-desc">
+            Compress, organize, and share your business files on the go. Compressa intelligently reduces file sizes without sacrificing quality — keeping your workflow lean and fast.
+          </p>
+          <div class="store-badges">
+            <span class="store-badge">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              App Store
+            </span>
+            <span class="store-badge">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76c.32.18.69.19 1.03.04l12.2-6.89-2.61-2.61L3.18 23.76zm17.03-9.83L17.4 12.3l-1.16.66L2.58 5.3C2.2 5.1 1.78 5.1 1.41 5.31.68 5.73.24 6.55.24 7.5v9c0 .95.44 1.77 1.17 2.19.37.21.79.21 1.17.01l12.63-7.13 2.59 2.59L17 12.3l.99-.57 1.71.98a2.2 2.2 0 0 0 2.13 0c.72-.42 1.17-1.24 1.17-2.19V3.5c0-.95-.45-1.77-1.17-2.19A2.2 2.2 0 0 0 20.7 1.31L7.07 8.44 4.48 5.85 3.18.24C2.86.06 2.49.05 2.15.2L3.18.24z"/></svg>
+              Google Play
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <div class="apps-info reveal reveal-delay-1">
+        <div class="apps-stat">
+          <div class="apps-stat-num">10K+</div>
+          <div class="apps-stat-label">Active users across all platforms</div>
+        </div>
+        <div class="apps-stat">
+          <div class="apps-stat-num">99.9%</div>
+          <div class="apps-stat-label">Uptime — because business never sleeps</div>
+        </div>
+        <div class="apps-stat">
+          <div class="apps-stat-num">4.8★</div>
+          <div class="apps-stat-label">Average App Store rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Let's build your apex together</h2>
+        <p class="section-sub">Whether you're a startup or a scaling enterprise, Arthapex is ready to grow with you. Reach out and we'll find the right fit.</p>
+        <br/><br/>
+        <p style="font-size:.82rem; color: var(--ink-60); line-height:1.8;">
+          <strong style="font-weight:500; color:var(--ink);">Email</strong><br/>
+          contact@arthapex.com
+        </p>
+        <br/>
+        <p style="font-size:.82rem; color: var(--ink-60); line-height:1.8;">
+          <strong style="font-weight:500; color:var(--ink);">Follow</strong><br/>
+          @arthapex on X · LinkedIn
+        </p>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="form-input" type="text" placeholder="Rohan" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" type="text" placeholder="Mehta" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Work Email</label>
+            <input class="form-input" type="email" placeholder="rohan@company.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input class="form-input" type="text" placeholder="Acme Corp" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell us about your team and what you're looking for…"></textarea>
+          </div>
+          <button class="btn-primary" type="button" style="width:fit-content">
+            Send Message
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Artha<span>pex</span></div>
+    <ul class="footer-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="/compressa">Compressa</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Arthapex. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
