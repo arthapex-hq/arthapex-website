@@ -4,6 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthapex — Peak Business Performance</title>
+
+  <!-- SEO & Social -->
+  <meta name="description" content="Arthapex gives ambitious teams the tools to work smarter — streamlining operations, surfacing insights, and compressing complexity into clarity." />
+  <meta name="theme-color" content="#1A1A18" />
+  <link rel="canonical" href="https://arthapex.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Arthapex — Peak Business Performance" />
+  <meta property="og:description" content="Streamline operations, surface insights, and compress complexity into clarity with Arthapex." />
+  <meta property="og:url" content="https://arthapex.com/" />
+  <!-- <meta property="og:image" content="https://arthapex.com/og-image.jpg" /> -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arthapex — Peak Business Performance" />
+  <meta name="twitter:description" content="Streamline operations, surface insights, and compress complexity into clarity with Arthapex." />
+  <!-- <meta name="twitter:image" content="https://arthapex.com/og-image.jpg" /> -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -32,6 +51,24 @@
       overflow-x: hidden;
     }
 
+    /* ── SKIP LINK (Accessibility) ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      padding: .6rem 1.2rem;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: .85rem;
+      border-radius: 4px;
+      z-index: 200;
+      text-decoration: none;
+      transition: top .2s;
+    }
+    .skip-link:focus {
+      top: .5rem;
+    }
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -40,6 +77,7 @@
       height: 68px;
       background: rgba(249,247,243,0.85);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       animation: fadeDown .6s ease both;
     }
@@ -63,7 +101,8 @@
       color: var(--ink-60); text-decoration: none; text-transform: uppercase;
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--ink); }
 
     .nav-cta {
       font-size: .8rem; font-weight: 500;
@@ -73,7 +112,29 @@
       color: var(--ink) !important;
       transition: background .2s, color .2s !important;
     }
-    .nav-cta:hover { background: var(--ink); color: var(--cream) !important; }
+    .nav-cta:hover,
+    .nav-cta:focus-visible { background: var(--ink); color: var(--cream) !important; }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px; height: 28px;
+      background: none; border: none; cursor: pointer;
+      padding: 0; z-index: 110;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 100%; height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform .3s ease, opacity .2s ease;
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ── HERO ── */
     .hero {
@@ -132,7 +193,9 @@
       border: none; cursor: pointer; border-radius: 2px;
       transition: background .25s, transform .2s;
     }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+    .btn-primary:hover,
+    .btn-primary:focus-visible { background: var(--sage); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); }
 
     .btn-ghost {
       display: inline-flex; align-items: center; gap: .5rem;
@@ -142,7 +205,8 @@
       padding-bottom: 2px;
       transition: color .2s, border-color .2s;
     }
-    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+    .btn-ghost:hover,
+    .btn-ghost:focus-visible { color: var(--ink); border-color: var(--ink); }
 
     /* Hero visual */
     .hero-visual {
@@ -320,7 +384,8 @@
       transition: border-color .25s, background .25s;
       text-decoration: none;
     }
-    .app-card:hover {
+    .app-card:hover,
+    .app-card:focus-visible {
       background: rgba(249,247,243,.09);
       border-color: rgba(196,147,58,.4);
     }
@@ -403,12 +468,57 @@
       font-family: 'DM Sans', sans-serif;
       font-size: .9rem; font-weight: 300; color: var(--ink);
       outline: none; resize: none;
-      transition: border-color .2s;
+      transition: border-color .2s, box-shadow .2s;
     }
-    .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
-    .form-textarea { min-height: 130px; }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(196,147,58,.1);
+    }
+    .form-textarea { min-height: 130px; resize: vertical; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* Form feedback */
+    .form-success {
+      display: none;
+      padding: 1rem 1.4rem;
+      background: #EAF0EC;
+      color: var(--sage);
+      font-size: .88rem;
+      font-weight: 400;
+      border-radius: 6px;
+      align-items: center;
+      gap: .5rem;
+    }
+    .form-success.show { display: flex; }
+
+    .btn-primary.sending {
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--cream);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .3s, visibility .3s, transform .3s, background .2s;
+      z-index: 50;
+      box-shadow: 0 4px 16px rgba(26,26,24,.2);
+    }
+    .back-to-top:hover { background: var(--sage); }
+    .back-to-top.visible {
+      opacity: 1; visibility: visible;
+      transform: translateY(0);
+    }
+    .back-to-top svg { width: 18px; height: 18px; }
 
     /* ── FOOTER ── */
     footer {
@@ -473,20 +583,96 @@
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-visual { justify-content: center; order: -1; }
+      .dashboard-card { max-width: 100%; }
       .features-grid { grid-template-columns: 1fr; }
       .apps-layout { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+
+      /* Mobile nav */
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0;
+        width: min(320px, 85vw);
+        height: 100dvh;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 80px 2rem 2rem;
+        background: var(--cream);
+        border-left: 1px solid var(--border);
+        box-shadow: -8px 0 40px rgba(26,26,24,.1);
+        transform: translateX(100%);
+        transition: transform .35s ease;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 1rem 0;
+        font-size: .95rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-cta {
+        margin-top: 1rem;
+        text-align: center;
+        border-bottom: none !important;
+      }
+      .mobile-overlay {
+        position: fixed; inset: 0;
+        background: rgba(26,26,24,.3);
+        z-index: 90;
+        opacity: 0; visibility: hidden;
+        transition: opacity .3s, visibility .3s;
+      }
+      .mobile-overlay.open { opacity: 1; visibility: visible; }
+    }
+
+    @media (max-width: 500px) {
+      section { padding: 60px 5vw; }
+      .feature-item { padding: 2rem 1.5rem; }
+      .app-card { padding: 2rem; }
+      .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 40px; height: 40px; }
+    }
+
+    /* ── FOCUS VISIBLE (keyboard users) ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Skip to content (Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Mobile overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
   <!-- NAV -->
-  <nav>
-    <a href="/" class="nav-logo">Artha<span>pex</span></a>
-    <ul class="nav-links">
+  <nav aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="Arthapex Home">Artha<span>pex</span></a>
+
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks" role="list">
       <li><a href="#features">Features</a></li>
       <li><a href="#apps">Apps</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -495,6 +681,7 @@
   </nav>
 
   <!-- HERO -->
+  <main id="main">
   <section class="hero">
     <div class="hero-text">
       <div class="hero-eyebrow">Business Performance Suite</div>
@@ -507,13 +694,13 @@
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
           Get Early Access
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#features" class="btn-ghost">Explore features</a>
       </div>
     </div>
 
-    <div class="hero-visual">
+    <div class="hero-visual" aria-hidden="true">
       <div class="dashboard-card">
         <div class="floating-pill">
           <span class="pulse"></span> Live Dashboard
@@ -573,7 +760,7 @@
     <div class="features-grid">
       <div class="feature-item reveal">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         </div>
         <div class="feature-name">Unified Workspace</div>
         <p class="feature-desc">All your projects, tasks, documents, and team communication in one coherent, distraction-free environment.</p>
@@ -581,7 +768,7 @@
 
       <div class="feature-item reveal reveal-delay-1">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div class="feature-name">Real-Time Analytics</div>
         <p class="feature-desc">Surface what matters most with live dashboards that track performance metrics and flag bottlenecks instantly.</p>
@@ -589,7 +776,7 @@
 
       <div class="feature-item reveal reveal-delay-2">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="feature-name">Secure by Design</div>
         <p class="feature-desc">Enterprise-grade encryption, role-based access controls, and audit logs — security that never gets in the way.</p>
@@ -597,7 +784,7 @@
 
       <div class="feature-item reveal">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
         </div>
         <div class="feature-name">Smart Automation</div>
         <p class="feature-desc">Set up workflows that handle repetitive tasks automatically — approvals, reminders, reports, and more.</p>
@@ -605,7 +792,7 @@
 
       <div class="feature-item reveal reveal-delay-1">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div class="feature-name">Team Collaboration</div>
         <p class="feature-desc">Comment, assign, and co-edit in real time. Keep everyone aligned without the back-and-forth of emails.</p>
@@ -613,7 +800,7 @@
 
       <div class="feature-item reveal reveal-delay-2">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
         <div class="feature-name">Cross-Platform</div>
         <p class="feature-desc">Work seamlessly across web, iOS, and Android. Your data syncs instantly so you're always in context.</p>
@@ -633,7 +820,7 @@
       <div>
         <a href="/compressa" class="app-card reveal">
           <div class="app-card-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </div>
           <div class="app-card-name">
             <span>arthapex.com/compressa</span>
@@ -644,11 +831,11 @@
           </p>
           <div class="store-badges">
             <span class="store-badge">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
               App Store
             </span>
             <span class="store-badge">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76c.32.18.69.19 1.03.04l12.2-6.89-2.61-2.61L3.18 23.76zm17.03-9.83L17.4 12.3l-1.16.66L2.58 5.3C2.2 5.1 1.78 5.1 1.41 5.31.68 5.73.24 6.55.24 7.5v9c0 .95.44 1.77 1.17 2.19.37.21.79.21 1.17.01l12.63-7.13 2.59 2.59L17 12.3l.99-.57 1.71.98a2.2 2.2 0 0 0 2.13 0c.72-.42 1.17-1.24 1.17-2.19V3.5c0-.95-.45-1.77-1.17-2.19A2.2 2.2 0 0 0 20.7 1.31L7.07 8.44 4.48 5.85 3.18.24C2.86.06 2.49.05 2.15.2L3.18.24z"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3.61 1.81L13.39 12l-9.78 10.19c-.28-.15-.47-.46-.47-.81V2.62c0-.35.19-.66.47-.81zM14.56 13.17l2.77 1.57-3.39 3.39-2.77-1.57 3.39-3.39zM20.08 9.92c.42.24.68.69.68 1.16s-.26.92-.68 1.16l-2.68 1.52-2.97-2.97 2.97-2.97 2.68 1.1zM14.56 10.83L11.17 7.44l3.39-3.39 2.77 1.57-2.77 5.21z"/></svg>
               Google Play
             </span>
           </div>
@@ -682,7 +869,7 @@
         <br/><br/>
         <p style="font-size:.82rem; color: var(--ink-60); line-height:1.8;">
           <strong style="font-weight:500; color:var(--ink);">Email</strong><br/>
-          contact@arthapex.com
+          <a href="mailto:contact@arthapex.com" style="color:var(--ink-60); text-decoration:none; border-bottom:1px solid var(--ink-30); transition: color .2s;">contact@arthapex.com</a>
         </p>
         <br/>
         <p style="font-size:.82rem; color: var(--ink-60); line-height:1.8;">
@@ -692,44 +879,49 @@
       </div>
 
       <div class="reveal reveal-delay-1">
-        <div class="contact-form">
+        <form class="contact-form" id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">First Name</label>
-              <input class="form-input" type="text" placeholder="Rohan" />
+              <label class="form-label" for="firstName">First Name</label>
+              <input class="form-input" id="firstName" name="firstName" type="text" placeholder="Rohan" required />
             </div>
             <div class="form-group">
-              <label class="form-label">Last Name</label>
-              <input class="form-input" type="text" placeholder="Mehta" />
+              <label class="form-label" for="lastName">Last Name</label>
+              <input class="form-input" id="lastName" name="lastName" type="text" placeholder="Mehta" required />
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Work Email</label>
-            <input class="form-input" type="email" placeholder="rohan@company.com" />
+            <label class="form-label" for="workEmail">Work Email</label>
+            <input class="form-input" id="workEmail" name="email" type="email" placeholder="rohan@company.com" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Company</label>
-            <input class="form-input" type="text" placeholder="Acme Corp" />
+            <label class="form-label" for="company">Company</label>
+            <input class="form-input" id="company" name="company" type="text" placeholder="Acme Corp" />
           </div>
           <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-textarea" placeholder="Tell us about your team and what you're looking for…"></textarea>
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your team and what you're looking for…" required></textarea>
           </div>
-          <button class="btn-primary" type="button" style="width:fit-content">
+          <div class="form-success" id="formSuccess">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Thanks! We'll be in touch soon.
+          </div>
+          <button class="btn-primary" id="submitBtn" type="submit" style="width:fit-content">
             Send Message
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
-        </div>
+        </form>
       </div>
     </div>
   </section>
+  </main>
 
   <div class="divider"></div>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Artha<span>pex</span></div>
-    <ul class="footer-links">
+    <ul class="footer-links" role="list">
       <li><a href="#features">Features</a></li>
       <li><a href="#apps">Apps</a></li>
       <li><a href="/compressa">Compressa</a></li>
@@ -740,8 +932,13 @@
     <div class="footer-copy">© 2026 Arthapex. All rights reserved.</div>
   </footer>
 
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
   <script>
-    // Scroll reveal
+    // ── Scroll reveal ──
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -752,6 +949,81 @@
       });
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
+
+    // ── Mobile nav ──
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    const overlay = document.getElementById('mobileOverlay');
+
+    function openNav() {
+      navLinks.classList.add('open');
+      overlay.classList.add('open');
+      navToggle.classList.add('active');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close menu');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      navLinks.classList.remove('open');
+      overlay.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.contains('open') ? closeNav() : openNav();
+    });
+    overlay.addEventListener('click', closeNav);
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeNav);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) closeNav();
+    });
+
+    // ── Back to top ──
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── Contact form ──
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formSuccess = document.getElementById('formSuccess');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Basic validation
+      const email = contactForm.email.value;
+      if (!email || !email.includes('@')) {
+        contactForm.email.focus();
+        return;
+      }
+
+      // Simulate sending (replace with real API call)
+      submitBtn.classList.add('sending');
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        submitBtn.classList.remove('sending');
+        submitBtn.innerHTML = 'Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        formSuccess.classList.add('show');
+        contactForm.reset();
+
+        setTimeout(() => formSuccess.classList.remove('show'), 5000);
+      }, 1200);
+    });
   </script>
 </body>
 </html>
